@@ -1,38 +1,39 @@
 {
-    "description": "Chinese (Simplified) edition",
-    "plugins": [],
+    "description": "Basic client-server edition",
+    "plugins": [
+        "tiddlywiki/tiddlyweb",
+        "tiddlywiki/filesystem",
+        "tiddlywiki/highlight"
+    ],
     "themes": [
         "tiddlywiki/vanilla",
-        "tiddlywiki/snowwhite",
-        "tiddlywiki/starlight",
-        "tiddlywiki/seamless",
-        "tiddlywiki/centralised",
-        "tiddlywiki/readonly"
-    ],
-    "languages": [
-        "zh-Hans"
+        "tiddlywiki/snowwhite"
     ],
     "build": {
         "index": [
             "--rendertiddler",
-            "$:/core/save/all",
+            "$:/plugins/tiddlywiki/tiddlyweb/save/offline",
             "index.html",
             "text/plain"
         ],
-        "empty": [
-            "--rendertiddler",
-            "$:/editions/zh-Hans/download-empty",
-            "empty.html",
+        "externalimages": [
+            "--savetiddlers",
+            "[is[image]]",
+            "images",
+            "--setfield",
+            "[is[image]]",
+            "_canonical_uri",
+            "$:/core/templates/canonical-uri-external-image",
+            "text/plain",
+            "--setfield",
+            "[is[image]]",
+            "text",
+            "",
             "text/plain",
             "--rendertiddler",
-            "$:/editions/zh-Hans/download-empty",
-            "empty.hta",
+            "$:/plugins/tiddlywiki/tiddlyweb/save/offline",
+            "externalimages.html",
             "text/plain"
-        ],
-        "favicon": [
-            "--savetiddler",
-            "$:/favicon.ico",
-            "favicon.ico"
         ],
         "static": [
             "--rendertiddler",
@@ -43,14 +44,14 @@
             "$:/core/templates/alltiddlers.template.html",
             "alltiddlers.html",
             "text/plain",
+            "--rendertiddler",
+            "$:/core/templates/static.template.css",
+            "static/static.css",
+            "text/plain",
             "--rendertiddlers",
             "[!is[system]]",
             "$:/core/templates/static.tiddler.html",
             "static",
-            "text/plain",
-            "--rendertiddler",
-            "$:/core/templates/static.template.css",
-            "static/static.css",
             "text/plain"
         ]
     }
